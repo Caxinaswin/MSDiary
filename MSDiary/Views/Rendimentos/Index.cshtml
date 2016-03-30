@@ -1,0 +1,82 @@
+﻿@model IEnumerable<MSDiary.Models.Rendimento>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container">
+    <div class="row">
+        <hr />
+        <h2 class="text-center">Lista de Rendimentos</h2>
+        <hr />
+    </div>
+    <div class="row paddingTop">
+        <div class="col-md-2">
+            <a href="@Url.Action("Create", "Rendimentos")" class="btn btn-success" data-toggle="tooltip" title="Adiciona uma despesa" style="float: left;">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            </a>
+        </div>
+        @using (Html.BeginForm())
+        {
+            <div class="form-horizontal">
+                <label class="control-label col-md-1 text-right">Data</label>
+                <div class="col-md-2">
+                    <input type="date" class="form-control" name="pesquisa" />
+                </div>
+                <div class="col-md-1">
+                    <button type="submit" class="btn btn-default" data-toggle="tooltip" title="Pesquisar por data"><span class="glyphicon glyphicon-search"></span></button>
+                </div>
+
+            </div>
+        }
+    </div>
+</div>
+<div class="row paddingTop">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoRendimento.TipoRendimentoNome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RendimentoDescricao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RendimentoValor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Data)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TipoRendimento.TipoRendimentoNome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RendimentoDescricao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RendimentoValor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Data)
+                </td>
+                <td>
+                    <button class="btn btn-default detailsRendimentos" data-id="@item.RendimentoId" data-toggle="tooltip" title="Detalhes do Rendimento"><i class="glyphicon glyphicon-file"></i></button>
+                    <button class="btn btn-danger deleteRendimentos" data-id="@item.RendimentoId" data-toggle="tooltip" title="Eliminar Rendimento"><i class="glyphicon glyphicon-trash"></i></button>
+                    <button class="btn btn-primary editRendimentos" data-id="@item.RendimentoId" data-toggle="tooltip" title="Editar Rendimento"><i class="glyphicon glyphicon-edit"></i></button>
+                </td>
+            </tr>
+        }
+
+    </table>
+    <div class="modal" id="modal">
+
+    </div>
+</div>
+@section scripts{
+    <script src="~/Scripts/CRUD/CRUD.js"></script>
+}

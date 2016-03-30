@@ -1,0 +1,34 @@
+﻿@model MSDiary.Models.ViewModelDetalhes
+
+@{
+    {
+        Layout = null;
+        ViewBag.Title = "Details";
+    }
+}
+
+
+<br />
+<br />
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title">Detalhes do produto</h4>
+        </div>
+        <div class="modal-body">
+            <p>@Html.LabelFor(model => model.TipoDespesa) : @Html.DisplayFor(model => model.TipoDespesa)</p>  
+            <p>@Html.LabelFor(model => model.TipoPagamento) : @Html.DisplayFor(model => model.TipoPagamento)</p>  
+            <p>@Html.LabelFor(model => model.Descricao) : @Html.DisplayFor(model => model.Descricao)</p>  
+            <p>@Html.LabelFor(model => model.Valor) : @Html.DisplayFor(model => model.Valor)</p>  
+            <p>@Html.LabelFor(model => model.Data) : @Html.DisplayFor(model => model.Data)</p>  
+            @if(Model.comentario != null)
+            {
+             <p>@Html.LabelFor(model => model.comentario) : @Html.DisplayFor(model => model.comentario)</p> 
+            }         
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+        </div>
+    </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->

@@ -1,0 +1,81 @@
+﻿@model IEnumerable<MSDiary.Models.Despesa>
+
+@{
+    ViewBag.Title = "Index";
+}
+<div class="container">
+    <div class="row">
+        <hr />
+        <h2 class="text-center">Lista de despesas</h2>
+        <hr />
+    </div>
+        <div class="row paddingTop">
+            <div class="col-md-2">
+                    <a href="@Url.Action("Create", "Despesas")" class="btn btn-danger" data-toggle="tooltip" title="Adiciona uma despesa" style="float: left;">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    </a>
+            </div>
+                    @using (Html.BeginForm())
+                    {
+                       <div class="form-horizontal">
+                           <label class="control-label col-md-1 text-right">Data</label>
+                           <div class="col-md-2">
+                               <input type="date" class="form-control" name="pesquisa" />
+                           </div>
+                           <div class="col-md-1">
+                               <button type="submit" class="btn btn-default" data-toggle="tooltip" title="Pesquisar por data"><span class="glyphicon glyphicon-search"></span></button>
+                           </div>
+
+                       </div>
+                    }
+        </div>
+    </div>
+        <div class="row paddingTop">
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.TipoDespesa.TipoDespesaNome)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DespesaDescricao)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DespesaValor)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Data)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TipoDespesa.TipoDespesaNome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DespesaDescricao)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DespesaValor)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Data)
+                    </td>
+                    <td>
+                        <button class="btn btn-default details" data-id="@item.DespesaId" data-toggle="tooltip" title="Detalhes da despesa"><i class="glyphicon glyphicon-file"></i></button>
+                        <button class="btn btn-danger delete" data-id="@item.DespesaId" data-toggle="tooltip" title="Eliminar despesa"><i class="glyphicon glyphicon-trash"></i></button>
+                        <button class="btn btn-primary edit" data-id="@item.DespesaId" data-toggle="tooltip" title="Editar despesa"><i class="glyphicon glyphicon-edit"></i></button>
+                    </td>
+                </tr>
+            }
+
+        </table>
+        <div class="modal" id="modal">
+
+        </div>
+    </div>
+@section scripts{
+    <script src="~/Scripts/CRUD/CRUD.js"></script>
+}

@@ -1,0 +1,19 @@
+﻿@model decimal 
+
+
+
+    @helper obtemSaldo()
+    {
+    if(Model < 0)
+    {
+        ViewBag.color = "red";
+                 <p style="color:red">@Model</p>
+            }
+    else
+    {
+        ViewBag.color = "green";
+                 <p style="color:green">@Model</p>
+    }
+}
+
+<h3>O seu saldo actual: <span>@obtemSaldo()</span></h3>

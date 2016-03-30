@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="~/Content/images/MSDiary.png" />
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/jqueryui")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    <script type="text/javascript" src="~/Scripts/Chart/canvasjs.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/Chart/Chart.js"></script>
+   
+
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("MSDiary", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Despesas", "Index", "Despesas")</li>
+                        <li>@Html.ActionLink("Rendimentos", "Index", "Rendimentos")</li>
+                        <li>@Html.ActionLink("Tipos de Despesa", "Index", "TipoDespesas")</li>
+                        <li>@Html.ActionLink("Tipos de Pagamento", "Index", "TipoPagamentos")</li>
+                        <li>@Html.ActionLink("Tipos de Rendimento", "Index", "TipoRendimentos")</li>
+                    }
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <footer>
+            @if (Request.IsAuthenticated)
+            {
+                <p>@Html.Action("_ObtemSaldo", "Home")</p>
+            }
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>
