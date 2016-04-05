@@ -38,6 +38,23 @@
 @if (Request.IsAuthenticated)
 {
     <h1 style="text-align:center">Dados Estatísticos</h1>
+    <div class="row">
+        @using (Html.BeginForm())
+        {
+            <div class="form-inline">
+                <div class="form-group">
+                    <label>Data Inicial</label>
+                    <input type="date" class="form-control" name="dataInicial" />
+                </div>
+                <div class="form-group">
+                    <label>Data Final</label>
+                    <input type="date" class="form-control" name="dataFinal" />
+                </div>
+                <button type="submit" class="btn btn-default" data-toggle="tooltip" title="Pesquisar por data"><span class="glyphicon glyphicon-search"></span></button>
+            </div>
+        }
+             
+    </div>
     <div class="row todasListas">
         <div class="col-md-4 listas">
             <dl class="dl-horizontal">
@@ -99,24 +116,6 @@
                 </dd>
             </dl>
         </div>
-    </div>
-    <div class="row">
-        @using (Html.BeginForm())
-        {
-            <div class="form-horizontal">
-                <label class="control-label col-md-2">Data Inicial</label>
-                <div class="col-md-2">
-                    <input type="date" class="form-control" name="dataInicial" />
-                </div>
-                <label class="control-label col-md-2" style="text-align:left;padding-right:0">Data Final</label>
-                <div class="col-md-2">
-                    <input type="date" class="form-control" name="dataFinal" />
-                </div><div class="col-md-1">
-                    <button type="submit" class="btn btn-default" data-toggle="tooltip" title="Pesquisar por data"><span class="glyphicon glyphicon-search"></span></button>
-                </div>
-
-            </div>
-        }
     </div>
 }
 <div class="modal" id="modal">
