@@ -109,3 +109,33 @@ a:hover
 {
     background-color:yellow;
 }
+
+fieldset dl
+{
+    border:2px solid black;
+    font-size:large;
+}
+
+.listas dt
+{
+    padding-top:25px;
+    text-align:left;
+}
+.listas dd
+{
+    padding-top:25px;
+    text-align:left;
+}
+.gastos{
+    color:red;
+}
+.rendimentos{
+    color:green;
+}
+
+.todasListas
+{
+    margin-top:40px;
+    background-color:lightgreen;
+    border: 2px solid black;
+} 

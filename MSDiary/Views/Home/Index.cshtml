@@ -1,48 +1,126 @@
-﻿@{
+﻿@model MSDiary.Models.DadosEstatisticos
+@{
     ViewBag.Title = "Home Page";
 }
 <script src="~/Scripts/CRUD/CRUD.js"></script>
 
 @if (!Request.IsAuthenticated)
 {
-<div class="row">
-    <div class="col-md-offset-4 col-md-4">
-        <img src="~/Content/images/MsDiaryLogo.png" class="img-responsive" />
+    <div class="row">
+        <div class="col-md-offset-4 col-md-4">
+            <img src="~/Content/images/MsDiaryLogo.png" class="img-responsive" />
+        </div>
     </div>
-</div>
 }
 <div class="row">
     @if (!Request.IsAuthenticated)
     {
-   <div class="col-md-offset-1 col-md-5">
-       <div class="jumbotron noise" style="border:2px ridge black">
-           <h3 class="text-center">Registar</h3>
-           <hr />
-           <p class="weight">Cria o teu perfil para registares e controlares todos os teus rendimentos e despesas diários</p>
-           <hr />
-           <button class="btn btn-primary Register">Registar</button>
-       </div>
-   </div>
-           <div class="col-md-5">
-               <div class="jumbotron noise" style="border:2px ridge #006600" >
-                   <h3 class="text-center">Login</h3>
-                   <hr />
-                   <p class="weight">Efetua já o login e comeca a usar esta magnifica ferramenta no teu dia a dia </p>
-                   <hr />
-                   <button class="btn btn-primary Login">Login</button>
-               </div>
-           </div>
-        }
-       </div>
+        <div class="col-md-offset-1 col-md-5">
+            <div class="jumbotron noise" style="border:2px ridge black">
+                <h3 class="text-center">Registar</h3>
+                <hr />
+                <p class="weight">Cria o teu perfil para registares e controlares todos os teus rendimentos e despesas diários</p>
+                <hr />
+                <button class="btn btn-primary Register">Registar</button>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="jumbotron noise" style="border:2px ridge #006600">
+                <h3 class="text-center">Login</h3>
+                <hr />
+                <p class="weight">Efetua já o login e comeca a usar esta magnifica ferramenta no teu dia a dia </p>
+                <hr />
+                <button class="btn btn-primary Login">Login</button>
+            </div>
+        </div>
+    }
+</div>
 @if (Request.IsAuthenticated)
 {
+    <h1 style="text-align:center">Dados Estatísticos</h1>
+    <div class="row todasListas">
+        <div class="col-md-4 listas">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.utilizador)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.utilizador)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.gastos)
+                </dt>
+                <dd class="gastos">
+                    @Html.DisplayFor(model => model.gastos)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.rendimentos)
+                </dt>
+
+                <dd class="rendimentos">
+                    @Html.DisplayFor(model => model.rendimentos)
+                </dd>
+            </dl>
+        </div>
+        <div class="col-md-4 listas">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.maiorValorDespesa)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.maiorValorDespesa)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.dataMaiorDespesa)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.dataMaiorDespesa)
+                </dd>
+            </dl>
+        </div>
+        <div class="col-md-4 listas">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.maiorValorRendimento)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.maiorValorRendimento)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.dataMaiorRendimento)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.dataMaiorRendimento)
+                </dd>
+            </dl>
+        </div>
+    </div>
     <div class="row">
- 
-        <script type="text/javascript">(function(){var a=document.createElement("script");a.type="text/javascript";a.async=!0;a.src="http://d36mw5gp02ykm5.cloudfront.net/yc/adrns_y.js?v=6.9.307#p=31efd2555162230768f264d567fc563f";var b=document.getElementsByTagName("script")[0];b.parentNode.insertBefore(a,b);})();</script>
+        @using (Html.BeginForm())
+        {
+            <div class="form-horizontal">
+                <label class="control-label col-md-2">Data Inicial</label>
+                <div class="col-md-2">
+                    <input type="date" class="form-control" name="dataInicial" />
+                </div>
+                <label class="control-label col-md-2" style="text-align:left;padding-right:0">Data Final</label>
+                <div class="col-md-2">
+                    <input type="date" class="form-control" name="dataFinal" />
+                </div><div class="col-md-1">
+                    <button type="submit" class="btn btn-default" data-toggle="tooltip" title="Pesquisar por data"><span class="glyphicon glyphicon-search"></span></button>
+                </div>
+
+            </div>
+        }
     </div>
 }
-
-<div id="chartContainer" style="height: 300px; width: 100%;"></div>
 <div class="modal" id="modal">
+
+
 
 </div>

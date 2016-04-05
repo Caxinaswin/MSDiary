@@ -70,7 +70,7 @@ namespace MSDiary.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(model);
+                return View();
             }
 
             ViewBag.UserLoged = User.Identity.GetUserId();
@@ -87,8 +87,8 @@ namespace MSDiary.Controllers
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
+                    ModelState.AddModelError("", "Login Falhou, Volte a verificar os campos");
+                    return View();
             }
         }
 

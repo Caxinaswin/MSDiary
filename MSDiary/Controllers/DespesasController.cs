@@ -20,8 +20,13 @@ namespace MSDiary.Controllers
         public ActionResult Index()
         {
             var userId = User.Identity.GetUserId();
-            ViewBag.UserId = User.Identity.GetUserId();
             var despesas = db.Despesas.Include(d => d.TipoDespesa).Include(d => d.TipoPagamento).Where(d => d.ApplicationUserId == userId);
+            ViewBag.TipoDespesa = db.TipoDespesas.Where(d => d.ApplicationUserId == userId).Select(
+            e => new SelectListItem
+             {
+                Text = e.TipoDespesaNome,
+                Value = e.TipoDespesaId.ToString()
+             });
             return View(despesas.ToList());
         }
         [HttpPost]

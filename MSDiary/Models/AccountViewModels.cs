@@ -76,9 +76,12 @@ namespace MSDiary.Models
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
+        [Display(Name = "Confirmação password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Display(Name = "Telemóvel")]
+        public string PhoneNumber { get; set; }
     }
 
     public class ResetPasswordViewModel

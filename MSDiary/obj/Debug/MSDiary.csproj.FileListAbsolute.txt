@@ -193,3 +193,4 @@ C:\Users\Filipe\Documents\Visual Studio 2015\Projects\MSDiary\MSDiary\obj\Debug\
 C:\Users\Filipe\Documents\Visual Studio 2015\Projects\MSDiary\MSDiary\obj\Debug\MSDiary.Migrations.chaveEstrangeiradespesaRendimento.resources
 C:\Users\Filipe\Documents\Visual Studio 2015\Projects\MSDiary\MSDiary\obj\Debug\MSDiary.Migrations.UtilizadorSaldo.resources
 C:\Users\Filipe\Documents\Visual Studio 2015\Projects\MSDiary\MSDiary\obj\Debug\MSDiary.Migrations.dbContextSaldoUtilizador.resources
+C:\Users\Filipe\Documents\Visual Studio 2015\Projects\MSDiary\MSDiary\obj\Debug\MSDiary.Migrations.subTipoDespesa.resources

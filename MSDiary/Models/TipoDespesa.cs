@@ -13,6 +13,8 @@ namespace MSDiary.Models
         [Required]
         public string TipoDespesaNome { get; set; }
 
+        public string subTipoDespesaNome { get; set; }
+
         public virtual ApplicationUser User { get; set; }
 
         public string ApplicationUserId { get; set; }

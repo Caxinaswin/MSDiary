@@ -301,9 +301,15 @@
     <Compile Include="Migrations\201603291808270_dbContextSaldoUtilizador.Designer.cs">
       <DependentUpon>201603291808270_dbContextSaldoUtilizador.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201604032010374_subTipoDespesa.cs" />
+    <Compile Include="Migrations\201604032010374_subTipoDespesa.Designer.cs">
+      <DependentUpon>201604032010374_subTipoDespesa.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\DadosEstatisticos.cs" />
     <Compile Include="Models\Despesa.cs" />
+    <Compile Include="Models\Gráfico.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Rendimento.cs" />
@@ -526,6 +532,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603291808270_dbContextSaldoUtilizador.resx">
       <DependentUpon>201603291808270_dbContextSaldoUtilizador.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604032010374_subTipoDespesa.resx">
+      <DependentUpon>201604032010374_subTipoDespesa.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
