@@ -194,3 +194,8 @@ C:\Users\Filipe\Documents\Visual Studio 2015\Projects\MSDiary\MSDiary\obj\Debug\
 C:\Users\Filipe\Documents\Visual Studio 2015\Projects\MSDiary\MSDiary\obj\Debug\MSDiary.Migrations.UtilizadorSaldo.resources
 C:\Users\Filipe\Documents\Visual Studio 2015\Projects\MSDiary\MSDiary\obj\Debug\MSDiary.Migrations.dbContextSaldoUtilizador.resources
 C:\Users\Filipe\Documents\Visual Studio 2015\Projects\MSDiary\MSDiary\obj\Debug\MSDiary.Migrations.subTipoDespesa.resources
+C:\Users\Filipe\Documents\Visual Studio 2015\Projects\MSDiary\MSDiary\obj\Debug\MSDiary.Migrations.subTipoDespesa1.resources
+C:\Users\Filipe\Documents\Visual Studio 2015\Projects\MSDiary\MSDiary\obj\Debug\MSDiary.Migrations.subtTipoV2.resources
+C:\Users\Filipe\Documents\Visual Studio 2015\Projects\MSDiary\MSDiary\obj\Debug\MSDiary.Migrations.subtTipoV3.resources
+C:\Users\Filipe\Documents\Visual Studio 2015\Projects\MSDiary\MSDiary\obj\Debug\MSDiary.Migrations.subtTipoV4.resources
+C:\Users\Filipe\Documents\Visual Studio 2015\Projects\MSDiary\MSDiary\obj\Debug\MSDiary.Migrations.subtTipoV5.resources

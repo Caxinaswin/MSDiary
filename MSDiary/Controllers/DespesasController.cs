@@ -21,12 +21,7 @@ namespace MSDiary.Controllers
         {
             var userId = User.Identity.GetUserId();
             var despesas = db.Despesas.Include(d => d.TipoDespesa).Include(d => d.TipoPagamento).Where(d => d.ApplicationUserId == userId);
-            ViewBag.TipoDespesa = db.TipoDespesas.Where(d => d.ApplicationUserId == userId).Select(
-            e => new SelectListItem
-             {
-                Text = e.TipoDespesaNome,
-                Value = e.TipoDespesaId.ToString()
-             });
+            ViewBag.TipoDespesa = new SelectList(db.TipoDespesas, "TipoDespesaId", "TipoDespesaNome");
             return View(despesas.ToList());
         }
         [HttpPost]

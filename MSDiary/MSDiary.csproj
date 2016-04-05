@@ -305,6 +305,26 @@
     <Compile Include="Migrations\201604032010374_subTipoDespesa.Designer.cs">
       <DependentUpon>201604032010374_subTipoDespesa.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201604051310461_subTipoDespesa1.cs" />
+    <Compile Include="Migrations\201604051310461_subTipoDespesa1.Designer.cs">
+      <DependentUpon>201604051310461_subTipoDespesa1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604051344262_subtTipoV2.cs" />
+    <Compile Include="Migrations\201604051344262_subtTipoV2.Designer.cs">
+      <DependentUpon>201604051344262_subtTipoV2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604051406272_subtTipoV3.cs" />
+    <Compile Include="Migrations\201604051406272_subtTipoV3.Designer.cs">
+      <DependentUpon>201604051406272_subtTipoV3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604051422291_subtTipoV4.cs" />
+    <Compile Include="Migrations\201604051422291_subtTipoV4.Designer.cs">
+      <DependentUpon>201604051422291_subtTipoV4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604051443055_subtTipoV5.cs" />
+    <Compile Include="Migrations\201604051443055_subtTipoV5.Designer.cs">
+      <DependentUpon>201604051443055_subtTipoV5.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\DadosEstatisticos.cs" />
@@ -465,6 +485,7 @@
     <Content Include="Views\Rendimentos\Edit.cshtml" />
     <Content Include="Views\Rendimentos\Index.cshtml" />
     <Content Include="Views\Home\_ObtemSaldo.cshtml" />
+    <Content Include="Views\TipoDespesas\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -535,6 +556,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201604032010374_subTipoDespesa.resx">
       <DependentUpon>201604032010374_subTipoDespesa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604051310461_subTipoDespesa1.resx">
+      <DependentUpon>201604051310461_subTipoDespesa1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604051344262_subtTipoV2.resx">
+      <DependentUpon>201604051344262_subtTipoV2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604051406272_subtTipoV3.resx">
+      <DependentUpon>201604051406272_subtTipoV3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604051422291_subtTipoV4.resx">
+      <DependentUpon>201604051422291_subtTipoV4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604051443055_subtTipoV5.resx">
+      <DependentUpon>201604051443055_subtTipoV5.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

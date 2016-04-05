@@ -19,8 +19,8 @@ namespace MSDiary.Controllers
         public ActionResult Index()
         {
             var userId = User.Identity.GetUserId();
-            var TipoDespesas = db.TipoDespesas.Where(d => d.ApplicationUserId == userId);
-            return View(TipoDespesas.ToList());
+            var tipoDespesas = db.TipoDespesas.Include(t => t.subTipo).Where(d => d.ApplicationUserId == userId);
+            return View(tipoDespesas.ToList());
         }
 
         // GET: TipoDespesas/Details/5
@@ -41,6 +41,7 @@ namespace MSDiary.Controllers
         // GET: TipoDespesas/Create
         public ActionResult Create()
         {
+            ViewBag.TipoDespesa = new SelectList(db.TipoDespesas, "TipoDespesaId", "TipoDespesaNome");
             return View();
         }
 
@@ -49,7 +50,7 @@ namespace MSDiary.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "TipoDespesaId,TipoDespesaNome")] TipoDespesa tipoDespesa)
+        public ActionResult Create([Bind(Include = "TipoDespesaId,TipoDespesaNome,subTipoDespesaId,ApplicationUserId")] TipoDespesa tipoDespesa)
         {
             if (ModelState.IsValid)
             {
@@ -59,6 +60,7 @@ namespace MSDiary.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.subTipoDespesaId = new SelectList(db.TipoDespesas, "TipoDespesaId", "TipoDespesaNome", tipoDespesa.subTipoDespesaId);
             return View(tipoDespesa);
         }
 
@@ -74,6 +76,7 @@ namespace MSDiary.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.subTipoDespesaId = new SelectList(db.TipoDespesas, "TipoDespesaId", "TipoDespesaNome", tipoDespesa.subTipoDespesaId);
             return View(tipoDespesa);
         }
 
@@ -82,7 +85,7 @@ namespace MSDiary.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "TipoDespesaId,TipoDespesaNome")] TipoDespesa tipoDespesa)
+        public ActionResult Edit([Bind(Include = "TipoDespesaId,TipoDespesaNome,subTipoDespesaId")] TipoDespesa tipoDespesa)
         {
             if (ModelState.IsValid)
             {
@@ -90,6 +93,7 @@ namespace MSDiary.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.subTipoDespesaId = new SelectList(db.TipoDespesas, "TipoDespesaId", "TipoDespesaNome", tipoDespesa.subTipoDespesaId);
             return View(tipoDespesa);
         }
 

@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Collections;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -44,5 +45,6 @@ namespace MSDiary.Models
         public DbSet<Rendimento> Rendimentos { get; set; }
         public DbSet<Saldo> Saldo { get; set; }
         public DbSet<SaldoUtilizador> SaldoUtilizadores { get; set; }
+        public IEnumerable IdentityUsers { get; internal set; }
     }
 }

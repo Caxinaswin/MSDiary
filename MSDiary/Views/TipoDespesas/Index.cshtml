@@ -14,6 +14,9 @@
         <th>
             @Html.DisplayNameFor(model => model.TipoDespesaNome)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.subTipo.TipoDespesaNome)
+        </th>
         <th></th>
     </tr>
 
@@ -23,9 +26,12 @@
             @Html.DisplayFor(modelItem => item.TipoDespesaNome)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.subTipo.TipoDespesaNome)
+        </td>
+        <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.TipoDespesaId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.TipoDespesaId }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.TipoDespesaId })
-            @Html.ActionLink("Details", "Details", new { id = item.TipoDespesaId })
         </td>
     </tr>
 }

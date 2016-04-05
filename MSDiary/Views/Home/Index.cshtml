@@ -38,7 +38,8 @@
 @if (Request.IsAuthenticated)
 {
     <h1 style="text-align:center">Dados Estatísticos</h1>
-    <div class="row paddingTop">
+    <hr />
+    <div class="row" style="padding-top:40px;">
         @using (Html.BeginForm())
         {
             <div class="form-inline">
@@ -55,7 +56,8 @@
         }
              
     </div>
-    <div class="row todasListas">
+
+    <div class="row todasListas" >
         <div class="col-md-4 listas">
             <dl class="dl-horizontal">
                 <dt>
