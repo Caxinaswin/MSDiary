@@ -7,13 +7,13 @@ namespace MSDiary.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class subTipoDespesa : IMigrationMetadata
+    public sealed partial class DataTimeCanbeNull : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(subTipoDespesa));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(DataTimeCanbeNull));
         
         string IMigrationMetadata.Id
         {
-            get { return "201604032010374_subTipoDespesa"; }
+            get { return "201604061543088_DataTimeCanbeNull"; }
         }
         
         string IMigrationMetadata.Source

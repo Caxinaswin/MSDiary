@@ -18,26 +18,26 @@ namespace MSDiary.Controllers
             var queryEntreDatas = db.SaldoUtilizadores.Where(d => d.ApplicationUserId == userId)
           .GroupBy(x => x.ApplicationUserId)
           .Select(x => new {
-              biggestValor = x.Max(y => y.valor),
-              lowestValor = x.Min(y => y.valor),
-              expenses = x.Where(y => y.valor < 0).Sum(y => y.valor),
-              earnings = x.Where(y => y.valor > 0).Sum(y => y.valor),
-              lowestDate = x.Where(y => y.valor == x.Min(z => z.valor)).Select(y => y.data).FirstOrDefault(),
-              biggestDate = x.Where(y => y.valor == x.Max(z => z.valor)).Select(y => y.data).FirstOrDefault()
-          }).FirstOrDefault();
+              biggestValor = x.Where(y => y.valor > 0).Max(y => (decimal?)y.valor)?? null,
+              lowestValor = x.Where(y => y.valor < 0).Min(y => (decimal?)y.valor)?? null,
+              expenses = x.Where(y => y.valor < 0).Sum(y => (decimal?)y.valor) ?? 0,
+              earnings = x.Where(y => y.valor > 0).Sum(y => (decimal?)y.valor) ?? 0,
+              lowestDate = x.Where(y => y.valor == x.Min(z => z.valor)).Where(y => y.valor < 0).Select(y => y.data).FirstOrDefault(),
+              biggestDate = x.Where(y => y.valor == x.Max(z => z.valor)).Where(y => y.valor > 0).Select(y => y.data).FirstOrDefault()
+          }).SingleOrDefault();
 
-            DadosEstatisticos modelo = new DadosEstatisticos()
+            if (userId != null && queryEntreDatas != null)
             {
-                utilizador = User.Identity.GetUserName(),
-                gastos = queryEntreDatas.expenses,
-                rendimentos = queryEntreDatas.earnings,
-                maiorValorDespesa = queryEntreDatas.lowestValor,
-                dataMaiorDespesa = queryEntreDatas.lowestDate,
-                dataMaiorRendimento = queryEntreDatas.biggestDate,
-                maiorValorRendimento = queryEntreDatas.biggestValor
-            };
-            if(userId != null)
-            {
+                DadosEstatisticos modelo = new DadosEstatisticos()
+                 {
+                     utilizador = User.Identity.GetUserName(),
+                     gastos = queryEntreDatas.expenses,
+                     rendimentos = queryEntreDatas.earnings,
+                     maiorValorDespesa = queryEntreDatas.lowestValor,
+                     dataMaiorDespesa = queryEntreDatas.lowestDate,
+                     dataMaiorRendimento = queryEntreDatas.biggestDate,
+                     maiorValorRendimento = queryEntreDatas.biggestValor
+                 };
                 return View(modelo);
             }
             else
@@ -56,70 +56,78 @@ namespace MSDiary.Controllers
          .GroupBy(x => x.ApplicationUserId)
          .Select(x => new
          {
-             biggestValor = x.Max(y => y.valor),
-             lowestValor = x.Min(y => y.valor),
-             expenses = x.Where(y => y.valor < 0).Sum(y => y.valor),
-             earnings = x.Where(y => y.valor > 0).Sum(y => y.valor),
-             lowestDate = x.Where(y => y.valor == x.Min(z => z.valor)).Select(y => y.data).FirstOrDefault(),
-             biggestDate = x.Where(y => y.valor == x.Max(z => z.valor)).Select(y => y.data).FirstOrDefault()
+             biggestValor = x.Where(y => y.valor > 0).Max(y => (decimal?)y.valor) ?? null,
+             lowestValor = x.Where(y => y.valor < 0).Min(y => (decimal?)y.valor) ?? null,
+             expenses = x.Where(y => y.valor < 0).Sum(y => (decimal?)y.valor) ?? 0,
+             earnings = x.Where(y => y.valor > 0).Sum(y => (decimal?)y.valor) ?? 0,
+             lowestDate = x.Where(y => y.valor == x.Min(z => z.valor)).Where(y => y.valor < 0).Select(y => y.data).FirstOrDefault(),
+             biggestDate = x.Where(y => y.valor == x.Max(z => z.valor)).Where(y => y.valor > 0).Select(y => y.data).FirstOrDefault()
          }).FirstOrDefault();
-
-            DadosEstatisticos modeloDefault = new DadosEstatisticos()
+            if (queryDefault != null)
             {
-                utilizador = User.Identity.GetUserName(),
-                gastos = queryDefault.expenses,
-                rendimentos = queryDefault.earnings,
-                maiorValorDespesa = queryDefault.lowestValor,
-                dataMaiorDespesa = queryDefault.lowestDate,
-                dataMaiorRendimento = queryDefault.biggestDate,
-                maiorValorRendimento = queryDefault.biggestValor
-            };
 
-            System.Diagnostics.Debug.WriteLine(dataInicial);
-
-            if (dataInicial != "" && dataFinal != "")
-            {
-                DateTime data1 = DateTime.Parse(dataInicial);
-                DateTime data2 = DateTime.Parse(dataFinal);
-
-                var queryEntreDatas = db.SaldoUtilizadores.Where(d => d.ApplicationUserId == userId && d.data >= data1 && d.data <= data2)
-             .GroupBy(x => x.ApplicationUserId)
-             .Select(x => new
-             {
-                 biggestValor = x.Max(y => y.valor),
-                 lowestValor = x.Min(y => y.valor),
-                 expenses = x.Where(y => y.valor < 0).Sum(y => y.valor),
-                 earnings = x.Where(y => y.valor > 0).Sum(y => y.valor),
-                 lowestDate = x.Where(y => y.valor == x.Min(z => z.valor)).Select(y => y.data).FirstOrDefault(),
-                 biggestDate = x.Where(y => y.valor == x.Max(z => z.valor)).Select(y => y.data).FirstOrDefault()
-             }).FirstOrDefault();
-
-
-
-                if (queryEntreDatas != null)
+                DadosEstatisticos modeloDefault = new DadosEstatisticos()
                 {
-                    DadosEstatisticos modelo = new DadosEstatisticos()
-                    {
-                        utilizador = User.Identity.GetUserName(),
-                        gastos = queryEntreDatas.expenses,
-                        rendimentos = queryEntreDatas.earnings,
-                        maiorValorDespesa = queryEntreDatas.lowestValor,
-                        dataMaiorDespesa = queryEntreDatas.lowestDate,
-                        dataMaiorRendimento = queryEntreDatas.biggestDate,
-                        maiorValorRendimento = queryEntreDatas.biggestValor
-                    };
-                    return View(modelo);
-                }
+                    utilizador = User.Identity.GetUserName(),
+                    gastos = queryDefault.expenses,
+                    rendimentos = queryDefault.earnings,
+                    maiorValorDespesa = queryDefault.lowestValor,
+                    dataMaiorDespesa = queryDefault.lowestDate,
+                    dataMaiorRendimento = queryDefault.biggestDate,
+                    maiorValorRendimento = queryDefault.biggestValor
+                };
 
+
+                System.Diagnostics.Debug.WriteLine(dataInicial);
+
+                if (dataInicial != "" && dataFinal != "")
+                {
+                    DateTime data1 = DateTime.Parse(dataInicial);
+                    DateTime data2 = DateTime.Parse(dataFinal);
+
+                    var queryEntreDatas = db.SaldoUtilizadores.Where(d => d.ApplicationUserId == userId && d.data >= data1 && d.data <= data2)
+                 .GroupBy(x => x.ApplicationUserId)
+                 .Select(x => new
+                 {
+                      biggestValor = x.Where(y => y.valor > 0).Max(y => (decimal?)y.valor) ?? null,
+             lowestValor = x.Where(y => y.valor < 0).Min(y => (decimal?)y.valor) ?? null,
+             expenses = x.Where(y => y.valor < 0).Sum(y => (decimal?)y.valor) ?? 0,
+             earnings = x.Where(y => y.valor > 0).Sum(y => (decimal?)y.valor) ?? 0,
+             lowestDate = x.Where(y => y.valor == x.Min(z => z.valor)).Where(y => y.valor < 0).Select(y => y.data).FirstOrDefault(),
+             biggestDate = x.Where(y => y.valor == x.Max(z => z.valor)).Where(y => y.valor > 0).Select(y => y.data).FirstOrDefault()
+                 }).FirstOrDefault();
+
+
+
+                    if (queryEntreDatas != null)
+                    {
+                        DadosEstatisticos modelo = new DadosEstatisticos()
+                        {
+                            utilizador = User.Identity.GetUserName(),
+                            gastos = queryEntreDatas.expenses,
+                            rendimentos = queryEntreDatas.earnings,
+                            maiorValorDespesa = queryEntreDatas.lowestValor,
+                            dataMaiorDespesa = queryEntreDatas.lowestDate,
+                            dataMaiorRendimento = queryEntreDatas.biggestDate,
+                            maiorValorRendimento = queryEntreDatas.biggestValor
+                        };
+                        return View(modelo);
+                    }
+
+                    else
+                    {
+                        return View(modeloDefault);
+                    }
+
+                }
                 else
                 {
                     return View(modeloDefault);
                 }
-
             }
             else
             {
-                return View(modeloDefault);
+                return View();
             }
 
         }

@@ -12,29 +12,19 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.subTipo.TipoDespesaNome)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.subTipo.TipoDespesaNome)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.User.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.User.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TipoDespesaNome)
+            @Html.LabelFor(model => model.TipoDespesaNome)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.TipoDespesaNome)
         </dd>
+        <dt>
+            @Html.LabelFor(model => model.subTipo.TipoDespesaNome,"Subtipo de despesa")
+        </dt>
 
+        <dd>
+            @Html.DisplayFor(model => model.subTipo.TipoDespesaNome)
+        </dd>
     </dl>
 
     @using (Html.BeginForm()) {

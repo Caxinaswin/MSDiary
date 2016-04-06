@@ -41,7 +41,7 @@ namespace MSDiary.Controllers
         // GET: TipoDespesas/Create
         public ActionResult Create()
         {
-            ViewBag.TipoDespesa = new SelectList(db.TipoDespesas, "TipoDespesaId", "TipoDespesaNome");
+            ViewBag.subTipoDespesaId = new SelectList(db.TipoDespesas, "TipoDespesaId", "TipoDespesaNome");
             return View();
         }
 

@@ -10,7 +10,7 @@ namespace MSDiary.Models
     {
         public int Id { get; set; }
         [DataType(DataType.Date)]
-        public DateTime data { get; set; }
+        public DateTime? data { get; set; }
         public virtual ApplicationUser User { get; set; }
 
         public string ApplicationUserId { get; set; }

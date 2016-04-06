@@ -18,13 +18,12 @@
                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                         </a>
                     </div>
-                    <div class="form-group">
-                        <div class="col-md-2">
-                            @Html.DropDownList("TipoDespesa", null, "", htmlAttributes: new { @class = "form-control" })
-                        </div>
+                    <div class="form-group col-md-offset-1">
+                        <label class="control-label">Tipo de despesa</label>
+                        @Html.DropDownList("TipoDespesa", (SelectList)ViewData["TipoDespesa"], "Todos", htmlAttributes: new { @class = "form-control" })
                     </div>
-                        <label class="control-label">Data</label>
-                        <div class="form-group">
+                        <div class="form-group"style="padding-left:20px">
+                            <label class="control-label">Data</label>
                             <input type="date" class="form-control" name="pesquisa" />
                         </div>
                         <div class="form-group">

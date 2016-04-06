@@ -7,13 +7,13 @@ namespace MSDiary.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class subtTipoV5 : IMigrationMetadata
+    public sealed partial class init : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(subtTipoV5));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(init));
         
         string IMigrationMetadata.Id
         {
-            get { return "201604051443055_subtTipoV5"; }
+            get { return "201604061345079_init"; }
         }
         
         string IMigrationMetadata.Source

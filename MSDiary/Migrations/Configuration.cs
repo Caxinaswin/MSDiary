@@ -10,7 +10,6 @@ namespace MSDiary.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "MSDiary.Models.ApplicationDbContext";
         }
 
         protected override void Seed(MSDiary.Models.ApplicationDbContext context)

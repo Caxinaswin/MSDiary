@@ -25,7 +25,7 @@ namespace MSDiary.Controllers
             return View(despesas.ToList());
         }
         [HttpPost]
-        public ActionResult Index(string pesquisa)
+        public ActionResult Index(string pesquisa,string tipoDespesa)
         {
             var userId = User.Identity.GetUserId();
             var resultado = from r in db.Despesas.Include(r => r.TipoDespesa).Include(r => r.TipoPagamento).Where(r => r.ApplicationUserId == userId)
@@ -35,6 +35,11 @@ namespace MSDiary.Controllers
             {
                 DateTime d = Convert.ToDateTime(pesquisa);
                 resultado = resultado.Where(r => r.Data == d);
+            }
+
+            if(pesquisa != "Todos")
+            {
+                resultado.Where(r => r.TipoDespesa.TipoDespesaNome == pesquisa);
             }
 
             return View(resultado);

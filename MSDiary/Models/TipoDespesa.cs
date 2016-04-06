@@ -13,9 +13,9 @@ namespace MSDiary.Models
         [Display(Name = "Tipo de Despesa")]
         [Required]
         public string TipoDespesaNome { get; set; }
-
+       
         public virtual  TipoDespesa subTipo { get; set; }
-
+        [Display(Name = "Subtipo de Despesa")]
         [ForeignKey("subTipo")]
         public int? subTipoDespesaId { get; set; }
 

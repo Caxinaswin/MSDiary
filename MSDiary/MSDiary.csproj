@@ -225,105 +225,13 @@
     </Compile>
     <Compile Include="Microsoft\AspNet\Identity\Owin\SignInManager.cs" />
     <Compile Include="Microsoft\AspNet\Identity\UserManager.cs" />
-    <Compile Include="Migrations\201603142156566_InitialCreate.cs" />
-    <Compile Include="Migrations\201603142156566_InitialCreate.Designer.cs">
-      <DependentUpon>201603142156566_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201604061345079_init.cs" />
+    <Compile Include="Migrations\201604061345079_init.Designer.cs">
+      <DependentUpon>201604061345079_init.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201603232138532_dadosTabela.cs" />
-    <Compile Include="Migrations\201603232138532_dadosTabela.Designer.cs">
-      <DependentUpon>201603232138532_dadosTabela.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603232152153_another.cs" />
-    <Compile Include="Migrations\201603232152153_another.Designer.cs">
-      <DependentUpon>201603232152153_another.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603241626254_SaldoUtilizador.cs" />
-    <Compile Include="Migrations\201603241626254_SaldoUtilizador.Designer.cs">
-      <DependentUpon>201603241626254_SaldoUtilizador.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603241817535_userRendimentos.cs" />
-    <Compile Include="Migrations\201603241817535_userRendimentos.Designer.cs">
-      <DependentUpon>201603241817535_userRendimentos.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603241838053_IdUtilizadorTipos.cs" />
-    <Compile Include="Migrations\201603241838053_IdUtilizadorTipos.Designer.cs">
-      <DependentUpon>201603241838053_IdUtilizadorTipos.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603261348138_colleccaoSaldo.cs" />
-    <Compile Include="Migrations\201603261348138_colleccaoSaldo.Designer.cs">
-      <DependentUpon>201603261348138_colleccaoSaldo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603261349177_listasSaldo.cs" />
-    <Compile Include="Migrations\201603261349177_listasSaldo.Designer.cs">
-      <DependentUpon>201603261349177_listasSaldo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603261357407_listasSaldo2.cs" />
-    <Compile Include="Migrations\201603261357407_listasSaldo2.Designer.cs">
-      <DependentUpon>201603261357407_listasSaldo2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603261403477_listasSaldo10.cs" />
-    <Compile Include="Migrations\201603261403477_listasSaldo10.Designer.cs">
-      <DependentUpon>201603261403477_listasSaldo10.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603261406438_listasSaldo101.cs" />
-    <Compile Include="Migrations\201603261406438_listasSaldo101.Designer.cs">
-      <DependentUpon>201603261406438_listasSaldo101.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603262034562_listas.cs" />
-    <Compile Include="Migrations\201603262034562_listas.Designer.cs">
-      <DependentUpon>201603262034562_listas.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603281133481_valorSaldo.cs" />
-    <Compile Include="Migrations\201603281133481_valorSaldo.Designer.cs">
-      <DependentUpon>201603281133481_valorSaldo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603291520179_saldoObjeto.cs" />
-    <Compile Include="Migrations\201603291520179_saldoObjeto.Designer.cs">
-      <DependentUpon>201603291520179_saldoObjeto.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603291614094_chaveUserSaldoUser.cs" />
-    <Compile Include="Migrations\201603291614094_chaveUserSaldoUser.Designer.cs">
-      <DependentUpon>201603291614094_chaveUserSaldoUser.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603291639042_chaveEstrangeiraSaldoUtilizador.cs" />
-    <Compile Include="Migrations\201603291639042_chaveEstrangeiraSaldoUtilizador.Designer.cs">
-      <DependentUpon>201603291639042_chaveEstrangeiraSaldoUtilizador.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603291644307_chaveEstrangeiradespesaRendimento.cs" />
-    <Compile Include="Migrations\201603291644307_chaveEstrangeiradespesaRendimento.Designer.cs">
-      <DependentUpon>201603291644307_chaveEstrangeiradespesaRendimento.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603291758321_UtilizadorSaldo.cs" />
-    <Compile Include="Migrations\201603291758321_UtilizadorSaldo.Designer.cs">
-      <DependentUpon>201603291758321_UtilizadorSaldo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603291808270_dbContextSaldoUtilizador.cs" />
-    <Compile Include="Migrations\201603291808270_dbContextSaldoUtilizador.Designer.cs">
-      <DependentUpon>201603291808270_dbContextSaldoUtilizador.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604032010374_subTipoDespesa.cs" />
-    <Compile Include="Migrations\201604032010374_subTipoDespesa.Designer.cs">
-      <DependentUpon>201604032010374_subTipoDespesa.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604051310461_subTipoDespesa1.cs" />
-    <Compile Include="Migrations\201604051310461_subTipoDespesa1.Designer.cs">
-      <DependentUpon>201604051310461_subTipoDespesa1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604051344262_subtTipoV2.cs" />
-    <Compile Include="Migrations\201604051344262_subtTipoV2.Designer.cs">
-      <DependentUpon>201604051344262_subtTipoV2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604051406272_subtTipoV3.cs" />
-    <Compile Include="Migrations\201604051406272_subtTipoV3.Designer.cs">
-      <DependentUpon>201604051406272_subtTipoV3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604051422291_subtTipoV4.cs" />
-    <Compile Include="Migrations\201604051422291_subtTipoV4.Designer.cs">
-      <DependentUpon>201604051422291_subtTipoV4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604051443055_subtTipoV5.cs" />
-    <Compile Include="Migrations\201604051443055_subtTipoV5.Designer.cs">
-      <DependentUpon>201604051443055_subtTipoV5.cs</DependentUpon>
+    <Compile Include="Migrations\201604061543088_DataTimeCanbeNull.cs" />
+    <Compile Include="Migrations\201604061543088_DataTimeCanbeNull.Designer.cs">
+      <DependentUpon>201604061543088_DataTimeCanbeNull.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -497,80 +405,11 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201603142156566_InitialCreate.resx">
-      <DependentUpon>201603142156566_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201604061345079_init.resx">
+      <DependentUpon>201604061345079_init.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603232138532_dadosTabela.resx">
-      <DependentUpon>201603232138532_dadosTabela.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603232152153_another.resx">
-      <DependentUpon>201603232152153_another.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603241626254_SaldoUtilizador.resx">
-      <DependentUpon>201603241626254_SaldoUtilizador.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603241817535_userRendimentos.resx">
-      <DependentUpon>201603241817535_userRendimentos.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603241838053_IdUtilizadorTipos.resx">
-      <DependentUpon>201603241838053_IdUtilizadorTipos.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603261348138_colleccaoSaldo.resx">
-      <DependentUpon>201603261348138_colleccaoSaldo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603261349177_listasSaldo.resx">
-      <DependentUpon>201603261349177_listasSaldo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603261357407_listasSaldo2.resx">
-      <DependentUpon>201603261357407_listasSaldo2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603261403477_listasSaldo10.resx">
-      <DependentUpon>201603261403477_listasSaldo10.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603261406438_listasSaldo101.resx">
-      <DependentUpon>201603261406438_listasSaldo101.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603262034562_listas.resx">
-      <DependentUpon>201603262034562_listas.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603281133481_valorSaldo.resx">
-      <DependentUpon>201603281133481_valorSaldo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603291520179_saldoObjeto.resx">
-      <DependentUpon>201603291520179_saldoObjeto.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603291614094_chaveUserSaldoUser.resx">
-      <DependentUpon>201603291614094_chaveUserSaldoUser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603291639042_chaveEstrangeiraSaldoUtilizador.resx">
-      <DependentUpon>201603291639042_chaveEstrangeiraSaldoUtilizador.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603291644307_chaveEstrangeiradespesaRendimento.resx">
-      <DependentUpon>201603291644307_chaveEstrangeiradespesaRendimento.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603291758321_UtilizadorSaldo.resx">
-      <DependentUpon>201603291758321_UtilizadorSaldo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603291808270_dbContextSaldoUtilizador.resx">
-      <DependentUpon>201603291808270_dbContextSaldoUtilizador.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604032010374_subTipoDespesa.resx">
-      <DependentUpon>201604032010374_subTipoDespesa.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604051310461_subTipoDespesa1.resx">
-      <DependentUpon>201604051310461_subTipoDespesa1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604051344262_subtTipoV2.resx">
-      <DependentUpon>201604051344262_subtTipoV2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604051406272_subtTipoV3.resx">
-      <DependentUpon>201604051406272_subtTipoV3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604051422291_subtTipoV4.resx">
-      <DependentUpon>201604051422291_subtTipoV4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604051443055_subtTipoV5.resx">
-      <DependentUpon>201604051443055_subtTipoV5.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201604061543088_DataTimeCanbeNull.resx">
+      <DependentUpon>201604061543088_DataTimeCanbeNull.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
