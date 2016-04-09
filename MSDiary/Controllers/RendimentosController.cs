@@ -42,16 +42,26 @@ namespace MSDiary.Controllers
         // GET: Rendimentos/Details/5
         public ActionResult Details(int? id)
         {
+            var modelo = db.Rendimentos.Include("TipoRendimento").Where(p => p.RendimentoId == id).FirstOrDefault();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Rendimento rendimento = db.Rendimentos.Find(id);
-            if (rendimento == null)
+            if (modelo == null)
             {
                 return HttpNotFound();
             }
-            return View(rendimento);
+            ViewModelDetalhesRendimento model = new ViewModelDetalhesRendimento()
+            {
+                TipoRendimento = modelo.TipoRendimento.TipoRendimentoNome,
+                Descricao = modelo.RendimentoDescricao,
+                Data = modelo.Data,
+                Valor = modelo.RendimentoValor,
+                comentario = modelo.Comentario,
+
+            };
+
+            return View(model);
         }
 
         // GET: Rendimentos/Create
@@ -88,17 +98,24 @@ namespace MSDiary.Controllers
                     saldo.Rendimentos.Add(rendimento);
                 }
 
+        
+
+                
+                db.Rendimentos.Add(rendimento);
+                db.SaveChanges();
+
                 SaldoUtilizador saldoUtilizador = new SaldoUtilizador()
                 {
                     ApplicationUserId = userId,
                     data = rendimento.Data,
                     rendimentoId = rendimento.RendimentoId,
                     valor = rendimento.RendimentoValor,
+                    TipoRendimentoId = rendimento.TipoRendimentoId,
                 };
 
                 db.SaldoUtilizadores.Add(saldoUtilizador);
-                db.Rendimentos.Add(rendimento);
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
 
@@ -109,6 +126,7 @@ namespace MSDiary.Controllers
         // GET: Rendimentos/Edit/5
         public ActionResult Edit(int? id)
         {
+
             var userId = User.Identity.GetUserId();
             if (id == null)
             {
@@ -131,8 +149,13 @@ namespace MSDiary.Controllers
         public ActionResult Edit([Bind(Include = "RendimentoId,TipoRendimentoId,RendimentoDescricao,RendimentoValor,Data,Comentario")] Rendimento rendimento)
         {
             var userId = User.Identity.GetUserId();
+            rendimento.ApplicationUserId = userId;
+            var rendimentoUtilizador = db.SaldoUtilizadores.Where(x => x.rendimentoId == rendimento.RendimentoId).Where(x => x.ApplicationUserId == userId).First();
+            rendimentoUtilizador.valor = rendimento.RendimentoValor;
+            rendimentoUtilizador.data = rendimento.Data;
             if (ModelState.IsValid)
             {
+                db.Entry(rendimentoUtilizador).State = EntityState.Modified;
                 db.Entry(rendimento).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -144,16 +167,27 @@ namespace MSDiary.Controllers
         // GET: Rendimentos/Delete/5
         public ActionResult Delete(int? id)
         {
+            var modelo = db.Rendimentos.Include("TipoRendimento").Where(p => p.RendimentoId == id).FirstOrDefault();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Rendimento rendimento = db.Rendimentos.Find(id);
-            if (rendimento == null)
+            if (modelo == null)
             {
                 return HttpNotFound();
             }
-            return View(rendimento);
+
+            ViewModelDetalhesRendimento model = new ViewModelDetalhesRendimento()
+            {
+                TipoRendimento = modelo.TipoRendimento.TipoRendimentoNome,
+                Descricao = modelo.RendimentoDescricao,
+                Data = modelo.Data,
+                Valor = modelo.RendimentoValor,
+                comentario = modelo.Comentario,
+
+            };
+
+            return View(model);
         }
 
         // POST: Rendimentos/Delete/5
@@ -161,8 +195,11 @@ namespace MSDiary.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            var userId = User.Identity.GetUserId();
+            var rendimentoUtilizador = db.SaldoUtilizadores.Where(x => x.rendimentoId == id).Where(x => x.ApplicationUserId == userId).First();
             Rendimento rendimento = db.Rendimentos.Find(id);
             db.Rendimentos.Remove(rendimento);
+            db.SaldoUtilizadores.Remove(rendimentoUtilizador);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

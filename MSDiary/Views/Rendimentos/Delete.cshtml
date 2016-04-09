@@ -1,6 +1,7 @@
-﻿@model MSDiary.Models.Rendimento
+﻿@model MSDiary.Models.ViewModelDetalhesRendimento
 
 @{
+    Layout = null;
     ViewBag.Title = "Delete";
 }
 
@@ -17,12 +18,12 @@
             @Html.AntiForgeryToken()
             <div class="modal-body">
                 <p>@Html.LabelFor(model => model.TipoRendimento) : @Html.DisplayFor(model => model.TipoRendimento)</p>
-                <p>@Html.LabelFor(model => model.RendimentoDescricao) : @Html.DisplayFor(model => model.RendimentoDescricao)</p>
-                <p>@Html.LabelFor(model => model.RendimentoValor) : @Html.DisplayFor(model => model.RendimentoValor)</p>
+                <p>@Html.LabelFor(model => model.Descricao) : @Html.DisplayFor(model => model.Descricao)</p>
+                <p>@Html.LabelFor(model => model.Valor) : @Html.DisplayFor(model => model.Valor)</p>
                 <p>@Html.LabelFor(model => model.Data) : @Html.DisplayFor(model => model.Data)</p>
-                @if (Model.Comentario != null)
+                @if (Model.comentario != null)
                 {
-                    <p>@Html.LabelFor(model => model.Comentario) : @Html.DisplayFor(model => model.Comentario)</p>
+                    <p>@Html.LabelFor(model => model.comentario) : @Html.DisplayFor(model => model.comentario)</p>
                 }
             </div>
             <div class="modal-footer">

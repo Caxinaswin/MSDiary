@@ -1,0 +1,33 @@
+﻿@model MSDiary.Models.TipoPagamento
+
+@{
+    ViewBag.Title = "Tipo de pagamento detalhes";
+}
+
+<h2>Detalhes</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoPagamentoNome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoPagamentoNome)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.TipoPagamentoId }) |
+    @Html.ActionLink("Voltar", "Index")
+</p>

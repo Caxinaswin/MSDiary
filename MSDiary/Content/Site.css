@@ -104,12 +104,6 @@ h3
     vertical-align: middle;
 }
 
-
-a:hover
-{
-    background-color:yellow;
-}
-
 fieldset dl
 {
     border:2px solid black;

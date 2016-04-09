@@ -1,13 +1,16 @@
 ﻿@model MSDiary.Models.TipoDespesa
 
-<h2>Eliminar</h2>
+@{
+    ViewBag.Title = "Detalhes Tipo de despesa";
+}
 
-<h3>Tem a certeza que pretende eliminar a despesa?</h3>
+<h2>Detalhes</h2>
+
 <div>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.LabelFor(model => model.TipoDespesaNome)
+            @Html.DisplayNameFor(model => model.TipoDespesaNome)
         </dt>
 
         <dd>
@@ -20,14 +23,10 @@
         <dd>
             @Html.DisplayFor(model => model.subTipo.TipoDespesaNome)
         </dd>
+
     </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Eliminar" class="btn btn-default" /> | |
-            @Html.ActionLink("voltar", "Index")
-        </div>
-    }
 </div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.TipoDespesaId }) |
+    @Html.ActionLink("voltar", "Index")
+</p>

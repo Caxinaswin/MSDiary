@@ -233,11 +233,18 @@
     <Compile Include="Migrations\201604061543088_DataTimeCanbeNull.Designer.cs">
       <DependentUpon>201604061543088_DataTimeCanbeNull.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201604080907362_tipoDespesaNoSaldoUtilizador.cs" />
+    <Compile Include="Migrations\201604080907362_tipoDespesaNoSaldoUtilizador.Designer.cs">
+      <DependentUpon>201604080907362_tipoDespesaNoSaldoUtilizador.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604081905376_despesaRendimentoNull.cs" />
+    <Compile Include="Migrations\201604081905376_despesaRendimentoNull.Designer.cs">
+      <DependentUpon>201604081905376_despesaRendimentoNull.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\DadosEstatisticos.cs" />
     <Compile Include="Models\Despesa.cs" />
-    <Compile Include="Models\Gráfico.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Rendimento.cs" />
@@ -246,7 +253,9 @@
     <Compile Include="Models\TipoDespesa.cs" />
     <Compile Include="Models\TipoPagamento.cs" />
     <Compile Include="Models\TipoRendimento.cs" />
-    <Compile Include="Models\ViewModelDetalhes.cs" />
+    <Compile Include="Models\ViewModelDetalhesDespesa.cs" />
+    <Compile Include="Models\ViewModelDetalhesRendimento.cs" />
+    <Compile Include="Models\viewModelTipoDespesas.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -394,6 +403,7 @@
     <Content Include="Views\Rendimentos\Index.cshtml" />
     <Content Include="Views\Home\_ObtemSaldo.cshtml" />
     <Content Include="Views\TipoDespesas\Details.cshtml" />
+    <Content Include="Views\TipoPagamentos\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -410,6 +420,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201604061543088_DataTimeCanbeNull.resx">
       <DependentUpon>201604061543088_DataTimeCanbeNull.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604080907362_tipoDespesaNoSaldoUtilizador.resx">
+      <DependentUpon>201604080907362_tipoDespesaNoSaldoUtilizador.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604081905376_despesaRendimentoNull.resx">
+      <DependentUpon>201604081905376_despesaRendimentoNull.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

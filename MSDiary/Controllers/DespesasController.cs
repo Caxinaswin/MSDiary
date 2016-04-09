@@ -14,19 +14,20 @@ namespace MSDiary.Controllers
 {
     public class DespesasController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();    
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Despesas
         public ActionResult Index()
         {
             var userId = User.Identity.GetUserId();
             var despesas = db.Despesas.Include(d => d.TipoDespesa).Include(d => d.TipoPagamento).Where(d => d.ApplicationUserId == userId);
+            System.Diagnostics.Debug.WriteLine(userId);
             ViewBag.TipoDespesa = new SelectList(db.TipoDespesas, "TipoDespesaId", "TipoDespesaNome");
             return View(despesas.ToList());
         }
         [HttpPost]
         public ActionResult Index(string pesquisa,string tipoDespesa)
-        {
+        {            ViewBag.TipoDespesa = new SelectList(db.TipoDespesas, "TipoDespesaId", "TipoDespesaNome",tipoDespesa);
             var userId = User.Identity.GetUserId();
             var resultado = from r in db.Despesas.Include(r => r.TipoDespesa).Include(r => r.TipoPagamento).Where(r => r.ApplicationUserId == userId)
                             select r;
@@ -37,9 +38,10 @@ namespace MSDiary.Controllers
                 resultado = resultado.Where(r => r.Data == d);
             }
 
-            if(pesquisa != "Todos")
+            if(tipoDespesa != "")
             {
-                resultado.Where(r => r.TipoDespesa.TipoDespesaNome == pesquisa);
+                int tipo = Convert.ToInt32(tipoDespesa);
+               resultado = resultado.Where(r => r.TipoDespesaId == tipo);
             }
 
             return View(resultado);
@@ -58,7 +60,7 @@ namespace MSDiary.Controllers
             {
                 return HttpNotFound();
             }
-            ViewModelDetalhes model = new ViewModelDetalhes()
+            ViewModelDetalhesDespesa model = new ViewModelDetalhesDespesa()
             {
                 TipoDespesa = modelo.TipoDespesa.TipoDespesaNome,
                 TipoPagamento = modelo.TipoPagamento.TipoPagamentoNome,
@@ -85,14 +87,13 @@ namespace MSDiary.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "DespesaId,TipoDespesaId,DespesaDescricao,DespesaValor,TipoPagamentoId,Data,Comentario")] Despesa despesa)
+        public ActionResult Create([Bind(Include = "DespesaId,TipoDespesaId,DespesaDescricao,DespesaValor,TipoPagamentoId,Data,Comentario,ApplicationUserId")] Despesa despesa)
         {
             var userId = User.Identity.GetUserId();
             if (ModelState.IsValid)
             {
 
                 var saldo = db.Saldo.Where(d => d.ApplicationUserId == userId).FirstOrDefault();
-
                 despesa.ApplicationUserId = userId;
 
                 if (saldo == null)
@@ -108,16 +109,19 @@ namespace MSDiary.Controllers
                     saldo.Despesas.Add(despesa);
                 }
 
+                db.Despesas.Add(despesa);
+                db.SaveChanges();
+
                 SaldoUtilizador saldoUtilizador = new SaldoUtilizador()
                 {
                     ApplicationUserId = userId,
                     data = despesa.Data,
                     despesaId = despesa.DespesaId,
                     valor = -despesa.DespesaValor,
+                    TipoDespesaId = despesa.TipoDespesaId,
                 };
 
                 db.SaldoUtilizadores.Add(saldoUtilizador);
-                db.Despesas.Add(despesa);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -153,8 +157,13 @@ namespace MSDiary.Controllers
         public ActionResult Edit([Bind(Include = "DespesaId,TipoDespesaId,DespesaDescricao,DespesaValor,TipoPagamentoId,Data,Comentario")] Despesa despesa)
         {
             var userId = User.Identity.GetUserId();
+            despesa.ApplicationUserId = userId;
             if (ModelState.IsValid)
             {
+                var despesaUtilizador = db.SaldoUtilizadores.Where(x => x.despesaId == despesa.DespesaId).Where(x => x.ApplicationUserId == userId).First();
+                despesaUtilizador.valor = despesa.DespesaValor;
+                despesaUtilizador.data = despesa.Data;
+                db.Entry(despesa).State = EntityState.Modified;
                 db.Entry(despesa).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -177,7 +186,7 @@ namespace MSDiary.Controllers
             {
                 return HttpNotFound();
             }
-            ViewModelDetalhes model = new ViewModelDetalhes()
+            ViewModelDetalhesDespesa model = new ViewModelDetalhesDespesa()
             {
                 TipoDespesa = modelo.TipoDespesa.TipoDespesaNome,
                 TipoPagamento = modelo.TipoPagamento.TipoPagamentoNome,
@@ -196,7 +205,10 @@ namespace MSDiary.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Despesa despesa = db.Despesas.Find(id);
+            var userId = User.Identity.GetUserId();
+            var despesaUtilizador = db.SaldoUtilizadores.Where(x => x.despesaId == id).Where(x => x.ApplicationUserId == userId).First();
             db.Despesas.Remove(despesa);
+            db.SaldoUtilizadores.Remove(despesaUtilizador);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

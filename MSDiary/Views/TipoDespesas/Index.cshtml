@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<MSDiary.Models.TipoDespesa>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Tipos de despesa";
 }
 
-<h2>Index</h2>
+<h2>Tipos de Despesa</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Criar", "Create")
 </p>
 <table class="table">
     <tr>
@@ -29,9 +29,9 @@
             @Html.DisplayFor(modelItem => item.subTipo.TipoDespesaNome)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.TipoDespesaId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.TipoDespesaId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.TipoDespesaId })
+            @Html.ActionLink("Editar", "Edit", new { id=item.TipoDespesaId }) |
+            @Html.ActionLink("Detalhes", "Details", new { id=item.TipoDespesaId }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.TipoDespesaId })
         </td>
     </tr>
 }
