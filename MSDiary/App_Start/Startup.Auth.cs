@@ -58,11 +58,7 @@ namespace MSDiary
                appId: "1765452750352619",
                appSecret: "ef9a59e374321e8b7a6d9ff12f7ceecb");
 
-            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            {
-                ClientId = "692760671497-kmlb0f1qpg94fscubaif0evj5b1m0lm3.apps.googleusercontent.com",
-                ClientSecret = "RsHIUholnHYxiz2uUApT0n5m"
-            });
+
         }
     }
 }

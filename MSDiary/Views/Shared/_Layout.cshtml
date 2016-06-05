@@ -16,6 +16,8 @@
 
 </head> 
 <body>
+@if (HttpContext.Current.Session["token"] != null)
+{
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -29,19 +31,17 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    @if (Request.IsAuthenticated)
-                    {
                         <li>@Html.ActionLink("Despesas", "Index", "Despesas")</li>
                         <li>@Html.ActionLink("Rendimentos", "Index", "Rendimentos")</li>
                         <li>@Html.ActionLink("Tipos de Despesa", "Index", "TipoDespesas")</li>
                         <li>@Html.ActionLink("Tipos de Pagamento", "Index", "TipoPagamentos")</li>
                         <li>@Html.ActionLink("Tipos de Rendimento", "Index", "TipoRendimentos")</li>
-                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
+}
     <div class="container body-content">
         @RenderBody()
         <footer>

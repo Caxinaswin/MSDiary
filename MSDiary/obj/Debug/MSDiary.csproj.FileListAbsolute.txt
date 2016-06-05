@@ -178,3 +178,5 @@ C:\Users\Filipe\Documents\Visual Studio 2015\Projects\MSDiary\MSDiary\obj\Debug\
 C:\Users\Filipe\Documents\Visual Studio 2015\Projects\MSDiary\MSDiary\obj\Debug\MSDiary.Migrations.DataTimeCanbeNull.resources
 C:\Users\Filipe\Documents\Visual Studio 2015\Projects\MSDiary\MSDiary\obj\Debug\MSDiary.Migrations.tipoDespesaNoSaldoUtilizador.resources
 C:\Users\Filipe\Documents\Visual Studio 2015\Projects\MSDiary\MSDiary\obj\Debug\MSDiary.Migrations.despesaRendimentoNull.resources
+C:\Users\Filipe\Documents\Visual Studio 2015\Projects\MSDiary\MSDiary\bin\System.Net.Http.Formatting.dll
+C:\Users\Filipe\Documents\Visual Studio 2015\Projects\MSDiary\MSDiary\bin\System.Net.Http.Formatting.xml

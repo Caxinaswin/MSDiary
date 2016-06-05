@@ -4,7 +4,7 @@
 }
 <script src="~/Scripts/CRUD/CRUD.js"></script>
 
-@if (!Request.IsAuthenticated)
+@if (HttpContext.Current.Session["token"] == null)
 {
     <div class="row">
         <div class="col-md-offset-4 col-md-4">
@@ -13,7 +13,7 @@
     </div>
 }
 <div class="row">
-    @if (!Request.IsAuthenticated)
+    @if (HttpContext.Current.Session["token"] != null)
     {
         <div class="col-md-offset-1 col-md-5">
             <div class="jumbotron noise" style="border:2px ridge black">
@@ -35,7 +35,7 @@
         </div>
     }
 </div>
-@if (Request.IsAuthenticated)
+@if (HttpContext.Current.Session["token"] == null)
 {
     <h1 style="text-align:center">Dados Estatísticos</h1>
     <hr />
@@ -56,8 +56,9 @@
         }
              
     </div>
-
     <div class="row todasListas" >
+        @if (Model != null)
+        {
         <div class="col-md-4 listas">
             <dl class="dl-horizontal">
                 <dt>
@@ -118,7 +119,13 @@
                 </dd>
             </dl>
         </div>
+        }
+        else
+        {
+            <h4 style="text-align:center">Ainda não tem dados estatisticos, introduza já a sua primeira despesa ou rendimento</h4>
+        }
     </div>
+
 }
 <div class="modal" id="modal">
 

@@ -8,6 +8,10 @@ using System.Web;
 using System.Web.Mvc;
 using MSDiary.Models;
 using Microsoft.AspNet.Identity;
+using MSDiary.Helper;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+using System.Net.Http;
 
 namespace MSDiary.Controllers
 {
@@ -16,26 +20,43 @@ namespace MSDiary.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: TipoPagamentos
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            var userId = User.Identity.GetUserId();
-            var TipoPagamentos = db.TipoPagamentos.Where(d => d.ApplicationUserId == userId);
-            return View(TipoPagamentos.ToList());
+            var client = WebApiHttpClient.GetClient();
+            HttpResponseMessage response = await client.GetAsync("api/TipoPagamentos");
+            if (response.IsSuccessStatusCode)
+            {
+                string content = await response.Content.ReadAsStringAsync();
+                var tipoPagamento =
+                JsonConvert.DeserializeObject<IEnumerable<TipoPagamento>>(content);
+                return View(tipoPagamento);
+            }
+            else
+            {
+                return Content("Ocorreu um erro: " + response.StatusCode);
+            }
         }
 
         // GET: TipoPagamentos/Details/5
-        public ActionResult Details(int? id)
+        public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TipoPagamento tipoPagamento = db.TipoPagamentos.Find(id);
-            if (tipoPagamento == null)
+            var client = WebApiHttpClient.GetClient();
+            HttpResponseMessage response = await client.GetAsync("api/TipoPagamentos/" + id);
+            if (response.IsSuccessStatusCode)
             {
-                return HttpNotFound();
+                string content = await response.Content.ReadAsStringAsync();
+                var tipoPagamento = JsonConvert.DeserializeObject<TipoPagamento>(content);
+                if (tipoPagamento == null) return HttpNotFound();
+                return View(tipoPagamento);
             }
-            return View(tipoPagamento);
+            else
+            {
+                return Content("Ocorreu um erro: " + response.StatusCode);
+            }
         }
 
         // GET: TipoPagamentos/Create
@@ -44,37 +65,54 @@ namespace MSDiary.Controllers
             return View();
         }
 
-        // POST: TipoPagamentos/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // POST: Produtos/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "TipoPagamentoId,TipoPagamentoNome")] TipoPagamento tipoPagamento)
+        public async Task<ActionResult> Create(
+        [Bind(Include = "TipoPagamentoId,TipoPagamentoNome")] TipoPagamento tipoPagamento)
         {
-            if (ModelState.IsValid)
+            try
             {
-                tipoPagamento.ApplicationUserId = User.Identity.GetUserId();
-                db.TipoPagamentos.Add(tipoPagamento);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var client = WebApiHttpClient.GetClient();
+                string produtoJSON = JsonConvert.SerializeObject(tipoPagamento);
+                HttpContent content = new StringContent(produtoJSON,
+                System.Text.Encoding.Unicode, "application/json");
+                var response = await client.PostAsync("api/TipoPagamentos", content);
+                if (response.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return Content("Ocorreu um erro: " + response.StatusCode);
+                }
             }
-
-            return View(tipoPagamento);
+            catch
+            {
+                return Content("Ocorreu um erro.");
+            }
         }
 
+
         // GET: TipoPagamentos/Edit/5
-        public ActionResult Edit(int? id)
+        public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TipoPagamento tipoPagamento = db.TipoPagamentos.Find(id);
-            if (tipoPagamento == null)
+            var client = WebApiHttpClient.GetClient();
+            HttpResponseMessage response = await client.GetAsync("api/TipoPagamentos/" + id);
+            if (response.IsSuccessStatusCode)
             {
-                return HttpNotFound();
+                string content = await response.Content.ReadAsStringAsync();
+                var tipoPagamento = JsonConvert.DeserializeObject<TipoPagamento>(content);
+                if (tipoPagamento == null) return HttpNotFound();
+                return View(tipoPagamento);
             }
-            return View(tipoPagamento);
+            return Content("Ocorreu um erro: " + response.StatusCode);
         }
 
         // POST: TipoPagamentos/Edit/5
@@ -82,42 +120,73 @@ namespace MSDiary.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "TipoPagamentoId,TipoPagamentoNome")] TipoPagamento tipoPagamento)
+        public async Task<ActionResult> Edit([Bind(Include = "TipoPagamentoId,TipoPagamentoNome")] TipoPagamento tipoPagamento)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(tipoPagamento).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var client = WebApiHttpClient.GetClient();
+                string produtoJSON = JsonConvert.SerializeObject(tipoPagamento);
+                HttpContent content = new StringContent(produtoJSON,
+                System.Text.Encoding.Unicode, "application/json");
+                var response =
+                await client.PutAsync("api/TipoPagamentos/" + tipoPagamento.TipoPagamentoId, content);
+                if (response.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return Content("Ocorreu um erro: " + response.StatusCode);
+                }
             }
-            return View(tipoPagamento);
+            catch
+            {
+                return Content("Ocorreu um erro.");
+            }
         }
 
         // GET: TipoPagamentos/Delete/5
-        public ActionResult Delete(int? id)
+        public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TipoPagamento tipoPagamento = db.TipoPagamentos.Find(id);
-            if (tipoPagamento == null)
+            var client = WebApiHttpClient.GetClient();
+            HttpResponseMessage response = await client.GetAsync("api/TipoPagamentos/" + id);
+            if (response.IsSuccessStatusCode)
             {
-                return HttpNotFound();
+                string content = await response.Content.ReadAsStringAsync();
+                var tipoPagamento = JsonConvert.DeserializeObject<TipoPagamento>(content);
+                if (tipoPagamento == null) return HttpNotFound();
+                return View(tipoPagamento);
             }
-            return View(tipoPagamento);
+            return Content("Ocorreu um erro: " + response.StatusCode);
         }
 
         // POST: TipoPagamentos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            TipoPagamento tipoPagamento = db.TipoPagamentos.Find(id);
-            db.TipoPagamentos.Remove(tipoPagamento);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+            try
+            {
+                var client = WebApiHttpClient.GetClient();
+                var response = await client.DeleteAsync("api/TipoPagamentos/" + id);
+                if (response.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return Content("Ocorreu um erro: " + response.StatusCode);
+                }
+            }
+            catch
+            {
+                return Content("Ocorreu um erro.");
+            }
+        }
 
         protected override void Dispose(bool disposing)
         {

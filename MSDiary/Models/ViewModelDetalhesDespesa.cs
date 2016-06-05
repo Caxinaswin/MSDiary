@@ -17,6 +17,7 @@ namespace MSDiary.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime Data { get; set; }
         public string comentario { get; set; }
+        public TipoDespesa subtTipoDespesa { get; set; }
 
 
     }

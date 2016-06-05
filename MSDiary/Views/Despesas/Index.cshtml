@@ -62,12 +62,14 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.TipoDespesa.TipoDespesaNome)
                     </td>
-                        @Html.DisplayFor(modelItem => item.TipoDespesa.subTipo)
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TipoDespesa.subTipo.TipoDespesaNome)
+                    </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.DespesaDescricao)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.DespesaValor)
+                        @Html.DisplayFor(modelItem => item.DespesaValor)€
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Data)

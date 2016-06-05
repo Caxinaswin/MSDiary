@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using MSDiary.Models;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace MSDiary.Controllers
     public class HomeController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+
         public ActionResult Index()
         {
             var userId = User.Identity.GetUserId();
@@ -163,8 +165,10 @@ namespace MSDiary.Controllers
                 }
             }
 
-            return PartialView(valor);
+            return PartialView(valor);     
         }
 
     }
 }
+
+

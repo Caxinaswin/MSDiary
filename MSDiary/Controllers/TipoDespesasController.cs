@@ -8,6 +8,10 @@ using System.Web;
 using System.Web.Mvc;
 using MSDiary.Models;
 using Microsoft.AspNet.Identity;
+using System.Threading.Tasks;
+using MSDiary.Helper;
+using System.Net.Http;
+using Newtonsoft.Json;
 
 namespace MSDiary.Controllers
 {
@@ -16,32 +20,52 @@ namespace MSDiary.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: TipoDespesas
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            var userId = User.Identity.GetUserId();
-            var tipoDespesas = db.TipoDespesas.Include(t => t.subTipo).Where(d => d.ApplicationUserId == userId);
-            return View(tipoDespesas.ToList());
+            
+            var client = WebApiHttpClient.GetClient();
+            HttpResponseMessage response = await client.GetAsync("api/TipoDespesas");
+            if (response.IsSuccessStatusCode)
+            {
+                string content = await response.Content.ReadAsStringAsync();
+                var tipoDespesa =
+                JsonConvert.DeserializeObject<IEnumerable<TipoDespesa>>(content);
+                return View(tipoDespesa);
+            }
+            else
+            {
+
+                return Content("Ocorreu um erro: " + response.StatusCode);
+            }
         }
 
+
         // GET: TipoDespesas/Details/5
-        public ActionResult Details(int? id)
+        public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TipoDespesa tipoDespesa = db.TipoDespesas.Find(id);
-            if (tipoDespesa == null)
+            var client = WebApiHttpClient.GetClient();
+            HttpResponseMessage response = await client.GetAsync("api/TipoDespesas/" + id);
+            if (response.IsSuccessStatusCode)
             {
-                return HttpNotFound();
+                string content = await response.Content.ReadAsStringAsync();
+                var tipodespesa = JsonConvert.DeserializeObject<TipoDespesa>(content);
+                if (tipodespesa == null) return HttpNotFound();
+                return View(tipodespesa);
             }
-            return View(tipoDespesa);
+            else
+            {
+                return Content("Ocorreu um erro: " + response.StatusCode);
+            }
         }
 
         // GET: TipoDespesas/Create
         public ActionResult Create()
         {
-            ViewBag.subTipoDespesaId = new SelectList(db.TipoDespesas, "TipoDespesaId", "TipoDespesaNome");
+            var userId = User.Identity.GetUserId();
             return View();
         }
 
@@ -50,34 +74,47 @@ namespace MSDiary.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "TipoDespesaId,TipoDespesaNome,subTipoDespesaId,ApplicationUserId")] TipoDespesa tipoDespesa)
+        public async Task<ActionResult> Create([Bind(Include = "TipoDespesaId,TipoDespesaNome,subTipoDespesaId")] TipoDespesa tipoDespesa)
         {
-            if (ModelState.IsValid)
+            try
             {
-                tipoDespesa.ApplicationUserId = User.Identity.GetUserId();
-                db.TipoDespesas.Add(tipoDespesa);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var client = WebApiHttpClient.GetClient();
+                string produtoJSON = JsonConvert.SerializeObject(tipoDespesa);
+                HttpContent content = new StringContent(produtoJSON,
+                System.Text.Encoding.Unicode, "application/json");
+                var response = await client.PostAsync("api/TipoDespesas", content);
+                if (response.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return Content("Ocorreu um erro: " + response.StatusCode);
+                }
             }
-
-            ViewBag.subTipoDespesaId = new SelectList(db.TipoDespesas, "TipoDespesaId", "TipoDespesaNome", tipoDespesa.subTipoDespesaId);
-            return View(tipoDespesa);
+            catch
+            {
+                return Content("Ocorreu um erro.");
+            }
         }
 
         // GET: TipoDespesas/Edit/5
-        public ActionResult Edit(int? id)
+        public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TipoDespesa tipoDespesa = db.TipoDespesas.Find(id);
-            if (tipoDespesa == null)
+            var client = WebApiHttpClient.GetClient();
+            HttpResponseMessage response = await client.GetAsync("api/TipoDespesas/" + id);
+            if (response.IsSuccessStatusCode)
             {
-                return HttpNotFound();
+                string content = await response.Content.ReadAsStringAsync();
+                var tipoDespesa = JsonConvert.DeserializeObject<TipoDespesa>(content);
+                if (tipoDespesa == null) return HttpNotFound();
+                return View(tipoDespesa);
             }
-            ViewBag.subTipoDespesaId = new SelectList(db.TipoDespesas, "TipoDespesaId", "TipoDespesaNome", tipoDespesa.subTipoDespesaId);
-            return View(tipoDespesa);
+            return Content("Ocorreu um erro: " + response.StatusCode);
         }
 
         // POST: TipoDespesas/Edit/5
@@ -85,42 +122,75 @@ namespace MSDiary.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "TipoDespesaId,TipoDespesaNome,subTipoDespesaId")] TipoDespesa tipoDespesa)
+        public async Task<ActionResult> Edit([Bind(Include = "TipoDespesaId,TipoDespesaNome,subTipoDespesaId")] TipoDespesa tipoDespesa)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(tipoDespesa).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
             ViewBag.subTipoDespesaId = new SelectList(db.TipoDespesas, "TipoDespesaId", "TipoDespesaNome", tipoDespesa.subTipoDespesaId);
-            return View(tipoDespesa);
+            try
+            {
+                var client = WebApiHttpClient.GetClient();
+                string produtoJSON = JsonConvert.SerializeObject(tipoDespesa);
+                HttpContent content = new StringContent(produtoJSON,
+                System.Text.Encoding.Unicode, "application/json");
+                var response =
+                await client.PutAsync("api/TipoDespesas/" + tipoDespesa.TipoDespesaId, content);
+                if (response.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return Content("Ocorreu um erro: " + response.StatusCode);
+                }
+            }
+            catch
+            {
+                return Content("Ocorreu um erro.");
+            }
         }
 
+
+
         // GET: TipoDespesas/Delete/5
-        public ActionResult Delete(int? id)
+        public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TipoDespesa tipoDespesa = db.TipoDespesas.Find(id);
-            if (tipoDespesa == null)
+            var client = WebApiHttpClient.GetClient();
+            HttpResponseMessage response = await client.GetAsync("api/TipoDespesas/" + id);
+            if (response.IsSuccessStatusCode)
             {
-                return HttpNotFound();
+                string content = await response.Content.ReadAsStringAsync();
+                var tipoDespesa = JsonConvert.DeserializeObject<TipoDespesa>(content);
+                if (tipoDespesa == null) return HttpNotFound();
+                return View(tipoDespesa);
             }
-            return View(tipoDespesa);
-        }
+            return Content("Ocorreu um erro: " + response.StatusCode);
+        }
 
         // POST: TipoDespesas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            TipoDespesa tipoDespesa = db.TipoDespesas.Find(id);
-            db.TipoDespesas.Remove(tipoDespesa);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                var client = WebApiHttpClient.GetClient();
+                var response = await client.DeleteAsync("api/TipoDespesas/" + id);
+                if (response.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return Content("Ocorreu um erro: " + response.StatusCode);
+                }
+            }
+            catch
+            {
+                return Content("Ocorreu um erro.");
+            }
         }
 
         protected override void Dispose(bool disposing)
